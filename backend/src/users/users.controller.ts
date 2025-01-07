@@ -10,6 +10,7 @@ export class UsersController {
 
     @Post('login')
     async login(@Body() userdata: userType) {
+        console.log("user data",userdata);
         const user = await this.userService.findByMail(userdata.email);
         if (!user || !(await bcrypt.compare(userdata.password, user?.password))) {
             return { authed : false};
